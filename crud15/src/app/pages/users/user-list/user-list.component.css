@@ -1,0 +1,20 @@
+.form-control {
+    width: 300px;
+    margin-bottom: 40px;
+    border: 1px solid green;
+}
+
+.players {
+    border-bottom: 500px;
+    max-width: 80%;
+
+}
+
+.table {
+border-top: 50%;
+border-color: rgba(128, 128, 128, 0.248);
+}
+
+.botonesCrud {
+    text-align: right;
+}

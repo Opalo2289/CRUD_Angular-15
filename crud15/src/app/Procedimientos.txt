@@ -1,0 +1,20 @@
+Para crear la conexion con firebase es necesario: 
+
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDtOflNKbRAXmjfgXwTexu8W1rZL4pv1dU",
+  authDomain: "guedys-crud-angular15.firebaseapp.com",
+  projectId: "guedys-crud-angular15",
+  storageBucket: "guedys-crud-angular15.appspot.com",
+  messagingSenderId: "736502194828",
+  appId: "1:736502194828:web:ff7ee46ee2b4d1e62ed1a9"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
