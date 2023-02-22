@@ -1,0 +1,26 @@
+/
+  _playerService = inject(PlayersService)
+  players$!: Observable<Player[]> 
+  searcher = new FormControl('')
+
+  ngOnInit(): void {
+    //this._playerService.getPlayer().subscribe((res)=> console.log(res)); 
+    
+    //Esto va a estar escuchando al.
+
+---------------------------------------------------------------|
+Esto asi como esta da un error en el this.players$ debido a que 
+getPlayer devuelve un observable de tipo Observable<DocumentData[]> y 
+this.players$ es un observable de tipo Player.
+
+Lo que hay que hacer es castear el getPlayer 
+---------------------------------------------------------------|
+    this.searcher.valueChanges.subscribe((search)=> {
+      if (search) {
+        this.players$ = this._playerService.getPlayer(search);
+      } else {
+        this.players$ = this._playerService.getPlayer();
+      }
+    })
+---------------------------------------------------------------|  
+  }

@@ -1,34 +1,39 @@
 <div class="container-fluid  d-flex flex-column align-items-center">
 <h4>User List</h4>
-<button type="button" class="btn btn-success">Agregar Jugadores</button>
+<button (click)="_router.navigate(['users/add'])" type="button" class="btn btn-success">Agregar Jugadores</button>
 </div>
 
 <div class="container-fluid players">
-    <input type="text" class="form-control">
+    <input [formControl]="searcher"  type="text" class="form-control">
+    <div class="players" *ngIf="players$ | async as players"> <!--(as players) es un alias-->
+      <pre><code>{{ players | json }}</code></pre>
     <table class="table">
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">nombre</th>
-            <th scope="col">apellidos</th>
-            <th scope="col">Sexo</th>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of listaTabla">
-            <th scope="row">{{item.id}}</th>
-            <td>{{item.nombre}}</td>
-            <td>{{item.apellidos}}</td>
-            <td>{{item.sexo}}</td>
+          <tr *ngFor="let player of players let i = index">
+            <th scope="row">{{i}}</th>
+            <td>{{player.id}}</td>
+            <td>{{player.name}}</td>
+            <td>
+              <li *ngFor="let deck of player.decks">
+                {{deck.name}} - {{deck.cards}} cartas
+              </li>
+            </td>
             <td>
               <div class="botonesCrud">
-                <button  (click)="navegarLista()" type="button" class="btn btn-primary">Añadir</button>
-                <button type="button" class="btn btn-warning ms-2">Editar</button>
-                <button type="button" class="btn btn-danger ms-2">Eliminar</button>
+                <button (click)="editPlayer(player)" type="button" class="btn btn-warning ms-2">Editar</button>
+                <button (click)="deletePlayer(player)" type="button" class="btn btn-danger ms-2">Eliminar</button>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
+      </div>
 </div>
