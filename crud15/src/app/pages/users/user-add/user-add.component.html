@@ -1,87 +1,38 @@
 <div class="container-fluid players">
-    <h3>Edd Players</h3>
-<form class="row g-3 needs-validation" novalidate>
-
-
-    <div class="col-md-4">
-      <label for="validationCustom01" class="form-label">Player Name</label>
-      <input placeholder="Player Name" type="text" class="form-control" id="validationCustom01" value="" required>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-    </div>
-
-
-    <!--<div class="col-md-4">
-      <label for="validationCustom02" class="form-label">Last name</label>
-      <input placeholder="Player Name" type="text" class="form-control" formControlName="validationCustom02"  id="validationCustom02" value="" required>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-    </div>
-
+    <h3>Add Players</h3>
+<form [formGroup]="form" class="row g-3 needs-validation">
+  <pre>
+    <code>{{form.value | json}}</code>
+  </pre>   //Para saber que esta funcionando el formulario-->
 
     <div class="col-md-4">
-      <label for="validationCustomUsername" class="form-label">Username</label>
-      <div class="input-group has-validation">
-        <span class="input-group-text" id="inputGroupPrepend">@</span>
-        <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
-        <div class="invalid-feedback">
-          Please choose a username.
-        </div>
-      </div>
+      <label for="name" class="form-label">Player Name</label>
+      <input id="name" placeholder="Player Name" type="text" class="form-control" formControlName="name">
     </div>
-
-
-    <div class="col-md-6">
-      <label for="validationCustom03" class="form-label">City</label>
-      <input type="text" class="form-control" id="validationCustom03" required>
-      <div class="invalid-feedback">
-        Please provide a valid city.
-      </div>
-    </div>
-
-
-    <div class="col-md-3">
-      <label for="validationCustom04" class="form-label">State</label>
-      <select class="form-select" id="validationCustom04" required>
-        <option selected disabled value="">Choose...</option>
-        <option>...</option>
-      </select>
-      <div class="invalid-feedback">
-        Please select a valid state.
-      </div>
-    </div>
-
-
-    <div class="col-md-3">
-      <label for="validationCustom05" class="form-label">Zip</label>
-      <input type="text" class="form-control" id="validationCustom05" required>
-      <div class="invalid-feedback">
-        Please provide a valid zip.
-      </div>
-    </div>
-
 
     <div class="col-12">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-        <label class="form-check-label" for="invalidCheck">
-          Agree to terms and conditions
-        </label>
-        <div class="invalid-feedback">
-          You must agree before submitting.
+      <button class="btn btn-primary" type="submit" (click)="createDeck()">Agregar Decks</button>
+    </div>
+    
+
+    <div class="decks" formArrayName="decks" *ngFor="let item of decks; let i = index"> <!--En principio este div no se pinta debido a que en el ts 'decks' se encuentra vacio. para eso cramos la funcion  (click)="createDeck()-->
+      <form class="row g-3" [formGroupName]="i">
+        <div class="col-auto">
+          <label for="name">Nombre</label>
+          <input type="text" id="name" class="form-control" formControlName="name" placeholder="Nombre del decks">
         </div>
-      </div>
-    </div>-->
-
-
-    <div class="col-12">
-      <button class="btn btn-primary" type="submit">Submit form</button>
+        <div class="col-auto">
+          <label for="cards">Cartas</label>
+          <input type="text" id="cards" class="form-control" formControlName="cards" placeholder="Cantidad de cartas">
+        </div>
+      </form>
     </div>
     <div class="col-12">
       <button class="btn btn-primary" type="submit">Guardar</button>
     </div>
+    
   </form>
 </div>
 
+
+ <!--Esto recorrerá cada uno de los decks que se agreguen-->
