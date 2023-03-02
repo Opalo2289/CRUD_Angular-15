@@ -1,10 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { atributosTablas} from '../../../common/interface/atributosTablas.interfase';
 import { PlayersService } from 'src/app/services/players.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { debounceTime, Observable, pipe } from 'rxjs';
 import { Player } from 'src/app/common/interface/player.interface';
 
 @Component({
@@ -29,7 +28,8 @@ export class UserListComponent implements OnInit {
     
   //Esto va a estar escuchando al.
       this.players$ = this._playerService.getPlayer();//Esto lo pongo aqui para que lo inicie apenas carga la pagina
-      this.searcher.valueChanges.subscribe((search)=> {
+      this.searcher.valueChanges.pipe(debounceTime(1000)).subscribe((search)=> {
+        console.log(search) //Si dejamos esto asi nos damos cuenta que hace muchas peticiones a firebase, esto no debe ser(para esto es el debounceTime que va a cargar a 1000ms )
       if (search) {
         this.players$ = this._playerService.getPlayer(search); //Ir a Casteo del getPlayer en el servicio
       } else {
@@ -42,11 +42,12 @@ export class UserListComponent implements OnInit {
 
 
   editPlayer(player: Player) {
-    this._router.navigateByUrl('users/edit')
+    this._router.navigateByUrl('users/edit', {state: { player }}) //Es para mantener el estado que querramos de una ruta a otra y de aqui volvemos nuevamente a userEdit y creamos el ngOnInit
   }
 
   deletePlayer(player: Player) {
     if(confirm(`Seguro de borrar a ${player.name}`)) {
+      this._playerService.deletePlayer(player.id);
     }
   }
 

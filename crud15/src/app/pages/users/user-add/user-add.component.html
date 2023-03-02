@@ -1,9 +1,10 @@
 <div class="container-fluid players">
     <h3>Add Players</h3>
-<form [formGroup]="form" class="row g-3 needs-validation">
-  <pre>
+<form [formGroup]="form" class="row g-3 needs-validation" novalidate>
+
+  <!--<pre>
     <code>{{form.value | json}}</code>
-  </pre>   //Para saber que esta funcionando el formulario-->
+  </pre>-->
 
     <div class="col-md-4">
       <label for="name" class="form-label">Player Name</label>
@@ -28,7 +29,7 @@
       </form>
     </div>
     <div class="col-12">
-      <button class="btn btn-primary" type="submit">Guardar</button>
+      <button class="btn btn-primary" type="submit" (click)="addplayer()">Guardar</button>
     </div>
     
   </form>

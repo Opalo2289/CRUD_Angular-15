@@ -6,14 +6,14 @@
 <div class="container-fluid players">
     <input [formControl]="searcher"  type="text" class="form-control">
     <div class="players" *ngIf="players$ | async as players"> <!--(as players) es un alias-->
-      <pre><code>{{ players | json }}</code></pre>
+      <!--<pre><code>{{ players | json }}</code></pre>-->
     <table class="table">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Id</th>
             <th scope="col">Nombre</th>
-            <th></th>
+            <th scope="col">Cartas</th>
             <th></th>
           </tr>
         </thead>
@@ -29,7 +29,7 @@
             </td>
             <td>
               <div class="botonesCrud">
-                <button (click)="editPlayer(player)" type="button" class="btn btn-warning ms-2">Editar</button>
+                <button (click)="editPlayer(player)" type="button" class="btn btn-primary ms-2">Editar</button>
                 <button (click)="deletePlayer(player)" type="button" class="btn btn-danger ms-2">Eliminar</button>
               </div>
             </td>

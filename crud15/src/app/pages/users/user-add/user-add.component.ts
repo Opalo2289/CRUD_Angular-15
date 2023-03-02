@@ -37,4 +37,18 @@ export class UserAddComponent {
       })
     )
   }
+
+  addplayer() {
+    /*
+    *this._playerService.addPlayer(this.form.getRawValue())
+    Esto puede funcionar, el problema es que nuestra interface de player tiene un ID
+    el cual no se esta pidiendo en los input dentro del formulario, el ID lo vamos a generar de manera manual obteniendo la fecha actual
+    */
+
+    this._playerService.addPlayer({
+      id: new Date().getTime().toString(),
+      ...this.form.getRawValue(),
+    }as Player);
+    this._rooter.navigate(['users'])
+  }
 }
